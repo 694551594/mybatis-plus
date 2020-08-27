@@ -202,19 +202,12 @@ subprojects {
     }
 
     publishing {
-        repositories {
-            maven {
-                def userName = System.getProperty("un")
-                def passWord = System.getProperty("ps")
-                def releasesRepoUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
-                def snapshotsRepoUrl = "https://oss.sonatype.org/content/repositories/snapshots/"
-                url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
-
-                credentials {
-                    username userName
-                    password passWord
-                }
-            }
+        repositories{
+               mavenLocal()
+               maven {
+                   def localMavenRepo = 'file://' + new File('H://work/maven').getPath()
+                   url = localMavenRepo
+               }
         }
         publications {
 

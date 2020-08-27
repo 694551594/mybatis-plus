@@ -48,6 +48,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.TypeHandler;
 import org.apache.ibatis.type.UnknownTypeHandler;
+import org.springframework.core.annotation.AnnotationUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -168,7 +169,9 @@ public class MybatisMapperAnnotationBuilder extends MapperAnnotationBuilder {
     }
 
     private void parseCache() {
-        CacheNamespace cacheDomain = type.getAnnotation(CacheNamespace.class);
+        // yanghuiqiang 缓存注解支持父类注解
+        CacheNamespace cacheDomain = AnnotationUtils.getAnnotation(type, CacheNamespace.class);
+        // CacheNamespace cacheDomain = type.getAnnotation(CacheNamespace.class);
         if (cacheDomain != null) {
             Integer size = cacheDomain.size() == 0 ? null : cacheDomain.size();
             Long flushInterval = cacheDomain.flushInterval() == 0 ? null : cacheDomain.flushInterval();
@@ -190,7 +193,9 @@ public class MybatisMapperAnnotationBuilder extends MapperAnnotationBuilder {
     }
 
     private void parseCacheRef() {
-        CacheNamespaceRef cacheDomainRef = type.getAnnotation(CacheNamespaceRef.class);
+        // yanghuiqiang 缓存注解支持父类注解
+        CacheNamespaceRef cacheDomainRef = AnnotationUtils.getAnnotation(type, CacheNamespaceRef.class);
+        // CacheNamespaceRef cacheDomainRef = type.getAnnotation(CacheNamespaceRef.class);
         if (cacheDomainRef != null) {
             Class<?> refType = cacheDomainRef.value();
             String refName = cacheDomainRef.name();
