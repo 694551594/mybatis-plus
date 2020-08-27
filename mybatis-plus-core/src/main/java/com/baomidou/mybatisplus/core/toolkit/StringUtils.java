@@ -78,6 +78,16 @@ public final class StringUtils {
     }
 
     /**
+     * 对象转为字符串去除左右空格
+     *
+     * @param o 带转换对象
+     * @return
+     */
+    public static String toStringTrim(Object o) {
+        return String.valueOf(o).trim();
+    }
+
+    /**
      * @see #isBlank(CharSequence)
      */
     public static boolean isNotBlank(CharSequence cs) {
@@ -279,7 +289,7 @@ public final class StringUtils {
      */
     public static String quotaMarkList(Collection<?> coll) {
         return coll.stream().map(StringUtils::quotaMark)
-                .collect(joining(StringPool.COMMA, StringPool.LEFT_BRACKET, StringPool.RIGHT_BRACKET));
+            .collect(joining(StringPool.COMMA, StringPool.LEFT_BRACKET, StringPool.RIGHT_BRACKET));
     }
 
     /**
@@ -497,8 +507,8 @@ public final class StringUtils {
         char lastChar = 'a';
         for (char c : s.toCharArray()) {
             if ((Character.isWhitespace(lastChar)) && (!Character.isWhitespace(c))
-                    && ('-' != c) && (buf.length() > 0)
-                    && (buf.charAt(buf.length() - 1) != '-')) {
+                && ('-' != c) && (buf.length() > 0)
+                && (buf.charAt(buf.length() - 1) != '-')) {
                 buf.append(StringPool.DASH);
             }
             if ('_' == c) {
