@@ -170,7 +170,7 @@ public class MybatisMapperAnnotationBuilder extends MapperAnnotationBuilder {
 
     private void parseCache() {
         // yanghuiqiang 缓存注解支持父类注解
-        CacheNamespace cacheDomain = AnnotationUtils.getAnnotation(type, CacheNamespace.class);
+        CacheNamespace cacheDomain = AnnotationUtils.findAnnotation(type, CacheNamespace.class);
         // CacheNamespace cacheDomain = type.getAnnotation(CacheNamespace.class);
         if (cacheDomain != null) {
             Integer size = cacheDomain.size() == 0 ? null : cacheDomain.size();
@@ -194,7 +194,7 @@ public class MybatisMapperAnnotationBuilder extends MapperAnnotationBuilder {
 
     private void parseCacheRef() {
         // yanghuiqiang 缓存注解支持父类注解
-        CacheNamespaceRef cacheDomainRef = AnnotationUtils.getAnnotation(type, CacheNamespaceRef.class);
+        CacheNamespaceRef cacheDomainRef = AnnotationUtils.findAnnotation(type, CacheNamespaceRef.class);
         // CacheNamespaceRef cacheDomainRef = type.getAnnotation(CacheNamespaceRef.class);
         if (cacheDomainRef != null) {
             Class<?> refType = cacheDomainRef.value();
